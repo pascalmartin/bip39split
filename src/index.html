@@ -1,0 +1,328 @@
+<!-- USAGE : Just open this file in your web browser of choice -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>bip39split - Fragmented Bip39 Paper Backup</title>
+
+  <link inline rel="stylesheet" href="../node_modules/spectre.css/dist/spectre.min.css">
+  <link inline rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+  <input type="radio" id="tab1" name="tabs" class="tab-locator" hidden checked />
+  <input type="radio" id="tab2" name="tabs" class="tab-locator" hidden />
+
+  <div class="container grid-lg no-print">
+    <div class="header">
+      <div class="logo"></div>
+      <h2>Fragmented Bip39 Paper Backup</h2>
+    </div>
+    <p>
+      Tools for create fragmented paper backup of your bip39 mnemonic phrase.<br />
+      This tool use <a target="blank" href="https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing">secret sharing</a>
+      for distributing your mnemonic phrase into cryptographically-secure pieces.<br />
+      Then you save the pieces to different place and to reconstruct the original, combine a specific number of pieces.
+    </p>
+    <br />
+
+    <ul class="tab tab-block">
+      <li class="tab-item"><label for="tab1"><a>Split / Backup</a></label></li>
+      <li class="tab-item"><label for="tab2"><a>Merge / Restore</a></label></li>
+    </ul>
+    <div class="tabs">
+      <div class="tab-content">
+
+        <form class="form-horizontal">
+
+          <div class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label" for="language">Mnemonic Language</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <select id="language" class="form-select">
+                <option value="english" selected="selected">English</option>
+                <option value="french">Français</option>
+                <option value="italian">Italiano</option>
+                <option value="spanish">Español</option>
+                <option value="korean">한국어</option>
+                <option value="japanese">日本語</option>
+                <option value="chinese_traditional">中文(繁體)</option>
+                <option value="chinese_simplified">中文(简体)</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="mnemonic-form-group" class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label" for="mnemonic">Bip39 Mnemonic</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <textarea class="form-input" id="mnemonic" rows="4" cols="100" oninput="OnInput(event)" >east gather super lyrics tip decrease oak present enact salmon loop bright solid onion tiger holiday run bracket curious island skate license duck dignity</textarea>
+              <label class="form-switch">
+                <input id="autocomplete" type="checkbox" checked>
+                <i class="form-icon"></i> Autocomplete
+              </label>
+              <p class="form-input-hint" hidden id="isNotValid">Bip39 Mnemonic is invalid.</p>
+              <p class="form-input-hint" hidden id="isValid">Bip39 Mnemonic is valid.</p>
+            </div>            
+          </div>
+          
+          <div id="nbShares-form-group" class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label" for="nbShares">Number of shares</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <input class="form-input" id="nbShares" placeholder="0" type="number" value="4" />
+            </div>
+          </div>
+
+          <div id="threshold-form-group" class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label" for="threshold">Threshold</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <input class="form-input" id="threshold" type="number" placeholder="0" value="3" />
+              <p class="form-input-hint" hidden id="isNotValidThreshold">Threshold is invalid. Must be at beetween 2 and number of shares</p>
+              <p class="form-input-hint" hidden id="isValidThreshold">Threshold is valid.</p>
+            </div>
+          </div>
+
+          <!-- form structure -->
+          <div class="form-group">
+              <button class="btn btn-primary" type="button" onclick="split()">Split</button>
+              <button id="print-btn" class="btn btn-success" type="button" onclick="window.print()">Print</button>
+          </div>
+        </form>
+       
+        <div class="divider text-center" data-content="Split result"></div>
+      </div>
+
+      <div  class="tab-content">
+      
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="col-3 col-sm-12">
+                <label class="form-label" for="rest-language">Mnemonic Language</label>
+              </div>
+              <div class="col-9 col-sm-12">
+                <select id="rest-language" class="form-select">
+                  <option value="english" selected="selected">English</option>
+                  <option value="french">Français</option>
+                  <option value="italian">Italiano</option>
+                  <option value="spanish">Español</option>
+                  <option value="korean">한국어</option>
+                  <option value="japanese">日本語</option>
+                  <option value="chinese_traditional">中文(繁體)</option>
+                  <option value="chinese_simplified">中文(简体)</option>
+                </select>
+              </div>
+            </div>
+          </form>
+          <div id="rest-share-form">
+            <div class="form-group" id="rest-share-group">
+              <label class="form-label" for="share-1">Enter your shares</label>
+              <div class="columns">
+                <div class="column col-10">
+                    <textarea class="form-input rest-share" type="text" id="share-1" placeholder="Enter one share"></textarea>
+                </div>
+                <div class="column col-2">
+                    <button onclick="Scan('share-1')" class="btn btn-lg">Scan QR Code</button>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column col-10">
+                    <textarea class="form-input rest-share" type="text" id="share-2" placeholder="Enter one share"></textarea>
+                </div>
+                <div class="column col-2">
+                    <button onclick="Scan('share-2')" class="btn btn-lg">Scan QR Code</button>
+                </div>
+              </div>
+              <div class="columns">
+                  <div class="column col-10">
+                      <textarea class="form-input rest-share" type="text" id="share-3" placeholder="Enter one share"></textarea>
+                  </div>
+                  <div class="column col-2">
+                      <button onclick="Scan('share-3')" class="btn btn-lg">Scan QR Code</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div id="rest-hash-form">
+              <div class="form-group" id="rest-hash-group">
+                <label class="form-label" for="validation-hash">Enter your reconstruction validation hash (optional)</label>
+                <div class="columns">
+                    <div class="column col-10">
+                        <textarea class="form-input rest-hash" type="text" id="validation-hash" placeholder="Enter hash"></textarea>
+                    </div>
+                    <div class="column col-2">
+                        <button onclick="Scan('validation-hash')" class="btn btn-lg">Scan QR Code</button>
+                    </div>
+                </div>
+                
+              </div>
+            </div>
+          <br/>
+          <button class="btn btn-primary" onclick="Reconstruct()">Reconstruct</button>
+          <button class="btn btn-link" onclick="AddShares()">Add share</button>
+
+
+          <div class="divider text-center" data-content="Merge result"></div>
+          
+          <div id="merge-result" style="display: none">
+              <h3>Reconstructed Bip39 Mnemonic</h3>
+              <div id="merge-result-mnemonic"></div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="split-result container grid-lg">
+    <div id="pieces" class="section-to-print">
+    </div>
+  </div>
+
+  <div class="modal" id="scan-modal">
+    <a href="javascript:CloseModal()" class="modal-overlay" aria-label="Close"></a>
+    <div class="modal-container">
+      <div class="modal-header">
+        <button onclick="CloseModal()" class="btn btn-clear float-right" aria-label="Close"></button>
+        <div class="modal-title h5">Scan your QR Code</div>
+      </div>
+      <div class="modal-body">
+        <div class="content">
+          <video id="preview"></video>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+
+  <script inline src="../node_modules/mustache/mustache.min.js"></script>
+  <script inline src="../node_modules/sjcl/sjcl.js"></script>
+  <script inline src="../node_modules/secrets.js-grempe/secrets.min.js"></script>
+  <script inline src="../node_modules/crypto-js/crypto-js.js"></script>
+  <script inline src="../lib/bip39.min.js"></script>
+  <script inline src="../lib/qrcodegen.js"></script>
+  <script inline src="../node_modules/webrtc-adapter/out/adapter.js"></script>
+  <script inline src="../lib/instascan.min.js"></script>
+  <script inline src="./js/app.js"></script>
+  
+  <script id="reconstruct_share_template" type="x-tmpl-mustache">
+    <div class="columns">
+        <div class="column col-10">
+            <textarea class="form-input rest-share" type="text" id="share-{{id}}" placeholder="Enter one share"></textarea>
+        </div>
+        <div class="column col-2">
+            <button onclick="Scan('share-{{id}}')" class="btn btn-lg">Scan QR Code</button>
+        </div>
+    </div>
+  </script>
+
+  <script id="pieces_template" type="x-tmpl-mustache">
+      {{#shares}}
+        <div class="{{pageBreak}}"></div>
+        <div class="header">
+          <div class="logo"></div>
+          <h3>Bip39 Paper Backup</h3>
+        </div>
+        <hr class="small"/>
+        <div>
+          <span class="typeLbl">Backup Type:</span>
+          <span>Fragmented Backup ({{threshold}}-of-{{nbShares}}) (Unencrypted)</span>
+        </div>
+        <div>
+          <span class="fragmentLbl">Fragment:</span>
+          <span>{{id}}-#{{pos}}</span>
+        </div>
+        <div>
+            <span class="mnemonicLanguageLbl">Mnemonic Language:</span>
+            <span>{{language}}</span>
+          </div>
+        
+        <br/>
+        <p>
+          Any subset of {{threshold}} fragments with this ID ({{id}}) are sufficient to recover the
+          Bip39 Mnemonic. To optimize the physical security of your wallet, please store the fragments in different locations.
+        </p>
+        <hr class="small"/>
+        
+          <div class="columns col-gapless">
+            <div class="column col-6">
+                <div class="block-exp">The following is fragment #{{pos}}.</div>
+                <p class="fragment">{{share}}</p>
+            </div>
+            <div class="column col-6">
+                <div class="block-exp block-exp-small">The following is reconstruction validation hash.</div>
+                <p class="hash">{{hash}}</p>
+            </div>
+          </div>
+
+          <p class="qrLbl">
+              The following QR code is for convenience only. It contains the exact same data as the lines above. 
+              If you copy this backup by hand, you can safely ignore this QR code.
+          </p>
+          
+          <div class="columns col-gapless">
+            <div class="column col-6">
+                <svg viewBox="{{qrCodeSvg.viewBox}}" class="qrCode">
+                    <rect width="100%" height="100%" fill="#FFFFFF" stroke-width="0"></rect>
+                    <path d="{{qrCodeSvg.path_d}}" fill="#000000" stroke-width="0"></path>
+                </svg>
+            </div>
+            <div class="column col-6">
+                <svg viewBox="{{hashQrCodeSvg.viewBox}}" class="qrCode">
+                    <rect width="100%" height="100%" fill="#FFFFFF" stroke-width="0"></rect>
+                    <path d="{{hashQrCodeSvg.path_d}}" fill="#000000" stroke-width="0"></path>
+                </svg>
+            </div>
+          </div>
+            
+       
+        <div class="circle_threshold">
+          {{#threshold_2}}
+            <div class="circle_page {{style}}">
+              <svg class="pie" viewbox="0 0 230 230">
+                <circle cx="115" cy="115" r="110"></circle>
+                <path d="M115,115 L115,5 A110,110 1 0,1 115,225 z"></path>
+              </svg>
+              <span>#{{id}}</span>
+            </div>
+          {{/threshold_2}}
+
+          {{#threshold_3}}
+            <div class="circle_page {{style}}">
+              <svg class="pie" viewbox="0 0 230 230">
+                <circle cx="115" cy="115" r="110"></circle>
+                <path d="M115,115 60,20 A110,110 1 0,1 225,115 z"></path>
+                <line x1="115" y1="115" x2="60" y2="210" style="stroke:rgb(0, 0, 0);stroke-width:3" />
+                <line x1="115" y1="115" x2="60" y2="20" style="stroke:rgb(0, 0, 0);stroke-width:3" />
+                <line x1="115" y1="115" x2="225" y2="115" style="stroke:rgb(0, 0, 0);stroke-width:3" />
+              </svg>
+              <span>#{{id}}</span>
+            </div>
+          {{/threshold_3}}
+
+          {{#threshold_4}}
+            <div class="circle_page {{style}}">
+              <svg class="pie" viewbox="0 0 230 230">
+                <circle cx="115" cy="115" r="110"></circle>
+                <path d="M115,115 L115,5 A110,110 1 0,1 225,115 z"></path>
+                <line x1="5" y1="115" x2="225" y2="115" style="stroke:rgb(0, 0, 0);stroke-width:3" />
+                <line x1="115" y1="5" x2="115" y2="225" style="stroke:rgb(0, 0, 0);stroke-width:3" />
+              </svg>
+              <span>#{{id}}</span>
+            </div>
+          {{/threshold_4}}
+        </div>
+
+        <hr class="no-print"/>
+
+      {{/shares}}
+      
+
+    </script>
+</body>
+
+</html>
