@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>bip39split - Fragmented Bip39 Paper Backup</title>
+  <title>bip39split - Paper Backup</title>
 
   <link inline rel="stylesheet" href="../node_modules/spectre.css/dist/spectre.min.css">
   <link inline rel="stylesheet" href="css/app.css">
@@ -16,7 +16,7 @@
   <div class="container grid-lg no-print">
     <div class="header">
       <div class="logo"></div>
-      <h2>Fragmented Bip39 Paper Backup</h2>
+      <h2>bip39split - Paper Backup</h2>
     </div>
     <p>
       Tools for create fragmented paper backup of your bip39 mnemonic phrase.<br />
@@ -228,13 +228,14 @@
           <h3>Bip39 Paper Backup</h3>
         </div>
         <hr class="small"/>
+        
         <div>
           <span class="typeLbl">Backup Type:</span>
           <span>Fragmented Backup ({{threshold}}-of-{{nbShares}}) (Unencrypted)</span>
         </div>
         <div>
           <span class="fragmentLbl">Fragment:</span>
-          <span>{{id}}-#{{pos}}</span>
+          <span class="fragmentValue">{{id}}-<span class="emphasisBlue">#{{pos}}</span></span>          
         </div>
         <div>
             <span class="mnemonicLanguageLbl">Mnemonic Language:</span>
@@ -243,14 +244,14 @@
         
         <br/>
         <p>
-          Any subset of {{threshold}} fragments with this ID ({{id}}) are sufficient to recover the
+          Any subset of <span class="emphasisBlue">{{threshold}}</span> fragments with this ID (<span class="emphasisBlue">{{id}}</span>) are sufficient to recover the
           Bip39 Mnemonic. To optimize the physical security of your wallet, please store the fragments in different locations.
         </p>
         <hr class="small"/>
         
           <div class="columns col-gapless">
             <div class="column col-6">
-                <div class="block-exp">The following is fragment #{{pos}}.</div>
+                <div class="block-exp">The following is fragment <span class="emphasisBlue">#{{pos}}</span>.</div>
                 <p class="fragment">{{share}}</p>
             </div>
             <div class="column col-6">
@@ -287,7 +288,7 @@
                 <circle cx="115" cy="115" r="110"></circle>
                 <path d="M115,115 L115,5 A110,110 1 0,1 115,225 z"></path>
               </svg>
-              <span>#{{id}}</span>
+              <span class="emphasisBlue">#{{id}}</span>
             </div>
           {{/threshold_2}}
 
@@ -300,7 +301,7 @@
                 <line x1="115" y1="115" x2="60" y2="20" style="stroke:rgb(0, 0, 0);stroke-width:3" />
                 <line x1="115" y1="115" x2="225" y2="115" style="stroke:rgb(0, 0, 0);stroke-width:3" />
               </svg>
-              <span>#{{id}}</span>
+              <span class="emphasisBlue">#{{id}}</span>
             </div>
           {{/threshold_3}}
 
@@ -312,7 +313,7 @@
                 <line x1="5" y1="115" x2="225" y2="115" style="stroke:rgb(0, 0, 0);stroke-width:3" />
                 <line x1="115" y1="5" x2="115" y2="225" style="stroke:rgb(0, 0, 0);stroke-width:3" />
               </svg>
-              <span>#{{id}}</span>
+              <span class="emphasisBlue">#{{id}}</span>
             </div>
           {{/threshold_4}}
         </div>

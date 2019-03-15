@@ -1,3 +1,18 @@
+@page  
+{ 
+    size: auto;   /* auto is the initial value */ 
+
+    /* this affects the margin in the printer settings */ 
+    margin: 0.4in 0.4in 0.4in 0.4in;  
+} 
+
+body  
+{ 
+    /* this affects the margin on the content before sending to printer */ 
+    margin: 0px;  
+} 
+
+
 .header{
   height: 62px;
   display: inline-block;
@@ -68,6 +83,15 @@ hr.small {
   display: inline-block;
 }
 
+.fragmentValue{
+  font-weight:bold; 
+}
+
+.emphasisBlue {
+  font-weight:bold; 
+  color: darkblue;
+}
+
 .block-exp {
   height: 24px;
 }
@@ -101,18 +125,6 @@ hr.small {
 .qrCode {
   width: 200px;
   height: 200px;
-}
-
-
-pie {
-	width: 5em;
-	height: 5em;
-	display: block;
-	border-radius: 50%;
-	background-color: black;
-	border: 2px solid black;
-	float: left;
-	margin: 1em;
 }
 
 .threshold_2 {
@@ -179,6 +191,7 @@ path {
 .selected > svg.pie {
   border-style: solid;
   border-width: 3px;
+  border-color: darkblue;
 }
 
 svg.pie {
@@ -186,8 +199,11 @@ svg.pie {
   height: 80px;
   display: block;
   float: left;
-  margin: 10px;
   padding: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  margin-left: 10px;
 }
 svg.pie * {
   width:  100%;
