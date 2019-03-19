@@ -38,8 +38,10 @@ var nextShareId = 4;
 function AddShares(){
   var template = document.getElementById('reconstruct_share_template').innerHTML;
   var output = Mustache.render(template, {id : nextShareId });
-  var restShareGroupElement = document.getElementById("rest-share-group");
-  restShareGroupElement.innerHTML += output;
+  var restShareGroupElement = document.getElementById("rest-share-group");	
+	var div = document.createElement('div');
+  div.innerHTML = output;
+	restShareGroupElement.appendChild(div);
   nextShareId += 1;
 }
 

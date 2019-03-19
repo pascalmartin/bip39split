@@ -15,8 +15,10 @@
 
   <div class="container grid-lg no-print">
     <div class="header">
-      <div class="logo"></div>
-      <h2>bip39split - Paper Backup</h2>
+      <h2>
+          <img inline src="../logo/puzzle.svg" />      
+          bip39split
+        </h2>
     </div>
     <p>
       Tools for create fragmented paper backup of your bip39 mnemonic phrase.<br />
@@ -24,11 +26,9 @@
       for distributing your mnemonic phrase into cryptographically-secure pieces.<br />
       Then you save the pieces to different place and to reconstruct the original, combine a specific number of pieces.
     </p>
-    <br />
-
     <ul class="tab tab-block">
-      <li class="tab-item"><label for="tab1"><a>Split / Backup</a></label></li>
-      <li class="tab-item"><label for="tab2"><a>Merge / Restore</a></label></li>
+      <li class="tab-item"><label for="tab1"><a><img inline class="split-merge-logo" src="../logo/splitfile.svg" />Split / Backup</a></label></li>
+      <li class="tab-item"><label for="tab2"><a><img inline class="split-merge-logo" src="../logo/mergefile.svg" />Merge / Restore</a></label></li>
     </ul>
     <div class="tabs">
       <div class="tab-content">
@@ -223,9 +223,11 @@
   <script id="pieces_template" type="x-tmpl-mustache">
       {{#shares}}
         <div class="{{pageBreak}}"></div>
-        <div class="header">
-          <div class="logo"></div>
-          <h3>Bip39 Paper Backup</h3>
+        <div class="header">            
+            <h3>
+              <img inline src="../logo/puzzle.svg" />
+              Bip39 Paper Backup
+            </h3>
         </div>
         <hr class="small"/>
         
