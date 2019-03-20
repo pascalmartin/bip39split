@@ -16,20 +16,20 @@
   <div class="container grid-lg no-print">
     <div class="header">
       <h2>
-          <img inline src="../logo/puzzle.svg" />      
+          <img inline src="../images/puzzle.svg" />      
           bip39split
       </h2>
       <div class="version">%%GULP_INJECT_VERSION%%</div> <!-- %%GULP_INJECT_VERSION%% v0.0.2 -->
     </div>
     <p>
-      Tools for create fragmented paper backup of your bip39 mnemonic phrase.<br />
-      This tool use <a target="blank" href="https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing">secret sharing</a>
+      Tool to create fragmented paper backup of your bip39 mnemonic phrase.<br />
+      This tool uses <a target="blank" href="https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing">secret sharing</a>
       for distributing your mnemonic phrase into cryptographically-secure pieces.<br />
-      Then you save the pieces to different place and to reconstruct the original, combine a specific number of pieces.
+      Then you save the pieces in different places and to reconstruct the original, combine a specific number of pieces.
     </p>
     <ul class="tab tab-block">
-      <li class="tab-item"><label for="tab1"><a><img inline class="split-merge-logo" src="../logo/splitfile.svg" />Split / Backup</a></label></li>
-      <li class="tab-item"><label for="tab2"><a><img inline class="split-merge-logo" src="../logo/mergefile.svg" />Merge / Restore</a></label></li>
+      <li class="tab-item"><label for="tab1"><a><img inline class="split-merge-logo" src="../images/splitfile.svg" />Split / Backup</a></label></li>
+      <li class="tab-item"><label for="tab2"><a><img inline class="split-merge-logo" src="../images/mergefile.svg" />Merge / Restore</a></label></li>
     </ul>
     <div class="tabs">
       <div class="tab-content">
@@ -176,10 +176,72 @@
           </div>
       </div>
 
+
+      
+
+
     </div>
   </div>
   <div class="split-result container grid-lg">
     <div id="pieces" class="section-to-print">
+    </div>
+  </div>
+
+  <div class="container grid-lg no-print">
+    <div class="row">
+      <br/><br/>
+      <hr />
+      <div class="col-md-12">
+        <h4>License</h4>
+        <p>
+            Please refer to <a href="https://github.com/pascalmartin/bip39split/blob/master/LICENSE" target="_blank">the software license</a> for more detail.<br/>
+          <br/>
+          The software is provided "as is", without warranty of any kind, express or implied, including but not limited to
+          the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the
+          authors or copyright holders be liable for any claim, damages or other liability, whether in an action of
+          contract, tort or otherwise, arising from, out of or in connection with the software or the use or other
+          dealings in the software.
+        </p>
+      </div>
+      <div class="col-md-12">
+        <h4>Offline Usage</h4>
+        <p>
+          You can use this tool without having to be online.<br />
+          In your browser, select file save-as, and save this page as a file. <br />
+          Double-click that file to open it in a browser on any offline computer.<br />
+          Alternatively, download the file from the repository <a href="https://github.com/pascalmartin/bip39split" target="_blank">https://github.com/pascalmartin/bip39split</a>
+        </p>
+      </div>
+      <div class="col-md-12">
+        <h4>This project is 100% open-source code</h4>
+        <p>
+            Get the source code from the repository - <a href="https://github.com/pascalmartin/bip39split" target="_blank">https://github.com/pascalmartin/bip39split</a>
+        </p>
+      </div>
+      <div class="col-md-12">
+        <h4>Donations</h4>
+        <p>
+            If you find this project useful, please make a small donation to keep this project healthy.
+        </p>
+        <div class="columns">
+            <div class="column col-6">
+                Bitcoin BTC<br/>
+                33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR<br/>
+                <img inline src="../images/donations/btc.svg"/>
+            </div>
+            <div class="column col-6">
+                Ethereum ETH<br/>
+                0x408c70e0C125894854700B23Cc8E5a9e7a3908ae<br/>
+                <img inline src="../images/donations/eth.svg"/>
+            </div>
+            <div class="column col-6">
+                XRP<br/>
+                rDaEQkutXT7oXGnnqdnsKbZXN5zpHBwUA9<br/>
+                <img inline src="../images/donations/xrp.svg">
+            </div>
+          </div>
+          <br/>
+      </div>
     </div>
   </div>
 
@@ -199,6 +261,8 @@
       </div>
     </div>
   </div>
+
+ 
 
   <script inline src="../node_modules/mustache/mustache.min.js"></script>
   <script inline src="../node_modules/sjcl/sjcl.js"></script>
@@ -226,8 +290,8 @@
         <div class="{{pageBreak}}"></div>
         <div class="header">            
             <h3>
-              <img inline src="../logo/puzzle.svg" />
-              Bip39 Paper Backup
+              <img inline src="../images/puzzle.svg" />
+              bip39split - Paper Backup
             </h3>
             <div class="version">%%GULP_INJECT_VERSION%%</div> <!-- %%GULP_INJECT_VERSION%% v0.0.2 -->
         </div>

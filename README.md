@@ -1,15 +1,15 @@
 # bip39split
-Tools for create fragmented paper backup of your bip39 mnemonic phrase.<br />
-This tool use [secret sharing](https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing)
+Tool to create fragmented paper backup of your bip39 mnemonic phrase.<br />
+This tool uses [secret sharing](https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing)
 for distributing your mnemonic phrase into cryptographically-secure pieces.<br />
-Then you save the pieces to different place and to reconstruct the original, combine a specific number of pieces.
+Then you save the pieces in different places and to reconstruct the original, combine a specific number of pieces.
 
 # Online Version
-Not recommended, use for testing<br />
+Not recommended for safety reasons, be careful<br />
 [bit39split.com](https://pascalmartin.github.io/bip39split)
 
 # Standalone offline version
-Recomended use<br />
+Recommended use<br />
 *Never use bip39split tool on a computer connected to internet*
 * Create a bootable ubuntu usb stick
 * Copy bip39split.html on another usb key
@@ -42,4 +42,9 @@ Powered by
 * [sjcl](https://github.com/bitwiseshiftleft/sjcl)
 
 # Donations
-If you find this project useful, please make a small donation to keep this project healthy.
+If you find this project useful, please make a small donation to keep this project healthy.<br />
+Coin | Address | QR Code
+-----|---------| -------
+Bitcoin BTC | 33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR | ![33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR](images/donations/btc.svg)
+Ethereum ETH | 0x408c70e0C125894854700B23Cc8E5a9e7a3908ae | ![33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR](images/donations/eth.svg) 
+XRP | rDaEQkutXT7oXGnnqdnsKbZXN5zpHBwUA9| ![33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR](images/donations/xrp.svg)
