@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var inlinesource = require('gulp-inline-source');
+var injectVersion = require('gulp-inject-version');
 
 gulp.task('inlinesource', function () {
     var options = {
@@ -8,6 +9,10 @@ gulp.task('inlinesource', function () {
     };
 
     return gulp.src('./src/index.html')
+        .pipe(injectVersion({
+            replace : /%%GULP_INJECT_VERSION%%/g,
+            prepend : 'v'
+        }))
         .pipe(inlinesource(options))
         .pipe(gulp.dest('./'));
 });

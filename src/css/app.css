@@ -14,14 +14,20 @@ body
 
 
 .header{
-  height: 62px;
+  height: 79px;
   display: inline-block;
-  margin-bottom: 15px;
 }
 
 .header > h2,  .header > h3{
   padding-top: 15px;
   text-align: center;
+  margin-bottom: 0px;
+}
+
+.version {
+  font-size: 12px;
+  font-style: italic;
+  margin-top: -7px;
 }
 
 @media print

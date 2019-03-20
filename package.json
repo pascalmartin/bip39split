@@ -22,6 +22,7 @@
     "devDependencies": {
         "browserify": "16.2.3",
         "gulp": "4.0.0",
+        "gulp-inject-version": "1.0.1",
         "gulp-inline-source": "4.0.0",
         "uglify-js": "3.4.9"
     },
