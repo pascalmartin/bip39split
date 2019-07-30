@@ -49,3 +49,9 @@ If you find this project useful, please make a small donation to keep this proje
 | Bitcoin BTC | 33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR | ![33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR](images/donations/btc.svg) |
 | Ethereum ETH | 0x408c70e0C125894854700B23Cc8E5a9e7a3908ae | ![33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR](images/donations/eth.svg) |
 | XRP | rDaEQkutXT7oXGnnqdnsKbZXN5zpHBwUA9 | ![33bWirMx4k2VXTxreLJFdWXgJE7buxMfAR](images/donations/xrp.svg) |
+
+---
+
+Cross-browser testing provided by:
+
+<a href="http://browserstack.com">![BrowserStack](images/Browserstack-logo.svg)</a>
