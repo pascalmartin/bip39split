@@ -1,6 +1,4 @@
-<p align="center">
-  [![Build Status](https://travis-ci.org/pascalmartin/bip39split.svg?branch=master)](https://travis-ci.org/pascalmartin/bip39split)
-</p>
+[![Build Status](https://travis-ci.org/pascalmartin/bip39split.svg?branch=master)](https://travis-ci.org/pascalmartin/bip39split)
 
 # bip39split
 Tool to create fragmented paper backup of your bip39 mnemonic phrase.<br />
