@@ -16,15 +16,15 @@
         "mustache": "3.0.1",
         "secrets.js-grempe": "1.1.0",
         "sjcl": "1.0.8",
-        "spectre.css": "0.5.5",
+        "spectre.css": "0.5.8",
         "webrtc-adapter": "3.3.3"
     },
     "devDependencies": {
-        "browserify": "16.2.3",
-        "gulp": "4.0.0",
+        "browserify": "16.3.0",
+        "gulp": "4.0.2",
         "gulp-inject-version": "1.0.1",
         "gulp-inline-source": "4.0.0",
-        "uglify-js": "3.4.9"
+        "uglify-js": "3.6.0"
     },
     "scripts": {
         "compileBip39Lib": "browserify -s bip39 node_modules/bip39/index.js | uglifyjs > lib/bip39.min.js",
