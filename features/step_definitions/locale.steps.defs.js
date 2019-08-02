@@ -27,11 +27,13 @@ setDefaultTimeout(60 * 1000);
 BeforeAll({ timeout: 120 * 1000 }, function (callback) {
   var task_id = parseInt(process.env.TASK_ID || 0);
   var caps = config.capabilities[task_id];
-
+  var folder = path.resolve(__dirname, '..', '..');
+  
   if (caps["bstack:options"] && caps["bstack:options"]['local']) {
     // Code to start browserstack local before start of test and stop browserstack local after end of test
+    console.log(`browserstack local folder: ${folder}`);
     bs_local = new browserstack.Local();
-    bs_local.start({ key: accessKey, folder: path.resolve(__dirname, '../../'), force: true }, function (error) {
+    bs_local.start({ key: accessKey, folder: folder, force: true }, function (error) {
       if (error) {
         console.log(error);
         callback(error);
