@@ -84,7 +84,7 @@ Then('I should see {string}', { timeout: 120 * 1000 }, function (sourceMatch, ne
         assert.strictEqual(source.indexOf(sourceMatch) > -1, true, 'Expected source to contain ' + sourceMatch);
         next();
       } catch (err) {
-        next(err.generatedMessage);
+        next(' >> ' + err);
       }
     }).catch(function (error) {
       next(error);

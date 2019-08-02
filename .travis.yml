@@ -3,11 +3,15 @@ node_js:
   - "lts/*"
 
 jobs:
-    - stage: "Packages"
-      name: "Packages bip39split with inlinesource"
-      script: npm run dist
-    - stage: "Tests"                # naming the Tests stage
-      name: "Cucumber Tests"            # names the first Tests stage job
-      script: npm test
+  - stage: "Packages"
+    name: "Packages bip39split with inlinesource"
+    script: npm run dist
+  - stage: "Tests"                # naming the Tests stage
+    name: "Cucumber Tests"            # names the first Tests stage job
+    script: npm test
     
-
+addons:
+  browserstack:
+    username: pascalmartin1
+    access_key:
+      secure: "aHV0T8Im4A5v/mx+Yex2n5Y0p6qQRQGuhg6NiRmB1k6liNl0WVQv1bOOYsOBOD0/G1iV64+uGmYKXhykL93x6xMZV6OZZJz9N6CCgroEPrIUs1BFDzybUvUwonWqJhBJURISm45p/dYAWZBmh5sAQTH7RDiplqOtaKQtF3MTUuHTEkd1iOX8gJuAlWrzjjTACIaNv3mpmdzKB9/9KAOBmTw37u1LurEIU3C0gWfUU6qLDWonDjDH1uLEt5YPyhUTg7Uam0xbu17KPwizaW5oXm1Vwr2VXZcdh9YkZE2N0WaNLuDA5JI7AqiJIcbbEUXb5IcyXs91jBlJdZhybhas4ruugDTy2N2Fp0e/HzGb9/ryDf6sNmukup9LYZKkPZy1TbY2Jm1EQSTCjRZkdaFLsczAdpySq/wvxNP9nNm/JeMu2G76Tv2K/5YZLPXlHlDmSZ+ifw7XoO0O3MbfHaWFKZ37mK3FQfpk/QC8svB+EoladhabJqd8SRIcTF5TFMrVOhtLe3KhR5HVEndWyxEQwbocnspwOVOoCUdgOX1YQcVEsE/AvsBFwr9DNlqcBnspRCd/EOEMs67NdwKvgjDr7oRTkarL29fTFPTZXockEt4IgkDQHN2KPdQ73Dv4rypveExH9FFKTbiiqhZtOSOuSj+k8vOr3cuYNSaRF4DhQtA="
