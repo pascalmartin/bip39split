@@ -1,3 +1,14 @@
 language: node_js
 node_js:
+  - "stable"
   - "10"
+
+jobs:
+    - stage: "Packages"
+      name: "Packages bip39split with inlinesource"
+      script: npm run dist
+    - stage: "Tests"                # naming the Tests stage
+      name: "Cucumber Tests"            # names the first Tests stage job
+      script: npm test
+    
+

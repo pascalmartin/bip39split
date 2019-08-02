@@ -21,10 +21,12 @@
     },
     "devDependencies": {
         "browserify": "16.3.0",
+        "browserstack-local": "^1.4.2",
         "cucumber": "^5.1.0",
         "gulp": "4.0.2",
         "gulp-inject-version": "1.0.1",
         "gulp-inline-source": "4.0.0",
+        "selenium-webdriver": "^4.0.0-alpha.4",
         "uglify-js": "3.6.0"
     },
     "scripts": {
