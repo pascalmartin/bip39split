@@ -1,22 +1,54 @@
 'use strict';
-const path = require('path')
+var crypto = require('crypto');
+const path = require('path');
 const assert = require('assert');
 const webdriver = require('selenium-webdriver');
 const browserstack = require('browserstack-local');
 const { AfterAll, BeforeAll, Before, Given, When, Then, setDefaultTimeout } = require('cucumber');
 
-var config_file = '../../cucumber.js';
-var config = require(config_file).config;
-
 var username = process.env.BROWSERSTACK_USERNAME;
 var accessKey = process.env.BROWSERSTACK_ACCESS_KEY;
+var localIdentifier = process.env.BROWSERSTACK_LOCAL_IDENTIFIER;
+var onTravis = true;
 
-var createBrowserStackSession = function (config, caps) {
+var randomValueHex = function(len) {
+  return crypto
+    .randomBytes(Math.ceil(len / 2))
+    .toString('hex') // convert to hexadecimal format
+    .slice(0, len) // return required number of characters
+};
+
+if (!localIdentifier){
+  onTravis = false;  
+  localIdentifier = "dev_" + randomValueHex(24);
+}
+console.log(`browserstack onTravis: ${onTravis} localIdentifier: ${localIdentifier}`);
+
+//caps['browserstack.localIdentifier'] = ENV['BROWSERSTACK_LOCAL_IDENTIFIER']
+
+var caps = {
+    'browserName': 'Chrome',                
+    'browserstack.use_w3c': true,
+    'browserstack.localIdentifier': localIdentifier,
+    'bstack:options': {
+        'os': 'Windows',
+        'osVersion': '7',
+        'sessionName': 'local_test',
+        'buildName': 'cucumber-js-browserstack',
+        'projectName': 'bip39split',
+        'debug': true,
+        'local': true
+    },
+};
+
+
+
+var createBrowserStackSession = function (caps) {
   return new webdriver.Builder().
     usingServer(`https://${username}:${accessKey}@hub-cloud.browserstack.com/wd/hub`).
     withCapabilities(caps).
     build();
-}
+};
 
 var bs_local = null;
 var driver = null;
@@ -25,27 +57,25 @@ setDefaultTimeout(60 * 1000);
 
 // Asynchronous Callback
 BeforeAll({ timeout: 120 * 1000 }, function (callback) {
-  var task_id = parseInt(process.env.TASK_ID || 0);
-  var caps = config.capabilities[task_id];
   var folder = path.resolve(__dirname, '..', '..');
   
-  if (caps["bstack:options"] && caps["bstack:options"]['local']) {
+  if (!onTravis) {
     // Code to start browserstack local before start of test and stop browserstack local after end of test
     console.log(`browserstack local folder: ${folder}`);
     bs_local = new browserstack.Local();
-    bs_local.start({ key: accessKey, folder: folder, force: true }, function (error) {
+    bs_local.start({ key: accessKey, folder: folder, localIdentifier: localIdentifier }, function (error) {
       if (error) {
         console.log(error);
         callback(error);
         return;
       }
 
-      driver = createBrowserStackSession(config, caps);
+      driver = createBrowserStackSession(caps);
       callback();
     });
   }
   else {
-    driver = createBrowserStackSession(config, caps);
+    driver = createBrowserStackSession(caps);
     callback();
   }
 });
