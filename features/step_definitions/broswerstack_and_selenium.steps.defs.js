@@ -35,6 +35,7 @@ console.log(`TRAVIS_PULL_REQUEST_BRANCH=${process.env.TRAVIS_PULL_REQUEST_BRANCH
 console.log(`TRAVIS_PULL_REQUEST_SHA=${process.env.TRAVIS_PULL_REQUEST_SHA}`);
 console.log(`TRAVIS_PULL_REQUEST_SLUG=${process.env.TRAVIS_PULL_REQUEST_SLUG}`);
 
+localIdentifier = null;
 
 var caps = {
     'browserName': 'Chrome',                
