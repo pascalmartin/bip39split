@@ -12,7 +12,7 @@ When('I open index', function (next) {
 });
 
 When('I open src index', function (next) {
-  this.driver.get(`http://${username}.browserstack.com/src%5Cindex.html`).then(function () {
+  this.driver.get(`http://${username}.browserstack.com/src/index.html`).then(function () {
     next();
   }).catch(function (error) {
     next(error);

@@ -1,6 +1,7 @@
 'use strict';
 var crypto = require('crypto');
 const path = require('path');
+const fs = require('fs');
 const webdriver = require('selenium-webdriver');
 const browserstack = require('browserstack-local');
 const { AfterAll, BeforeAll, Before, setDefaultTimeout } = require('cucumber');
@@ -67,11 +68,27 @@ setDefaultTimeout(60 * 1000);
 
 // Asynchronous Callback
 BeforeAll({ timeout: 120 * 1000 }, function (callback) {
-  var folder = path.resolve(__dirname, '..', '..');
+  var folder = path.resolve(__dirname, '..', '..') + '/';
   
   if (!process.env.BROWSERSTACK_LOCAL_IDENTIFIER) {
     // Code to start browserstack local before start of test and stop browserstack local after end of test
     console.log(`browserstack local folder: ${folder}`);
+
+    try {
+      var srcfolder = path.resolve(__dirname, '..', '..','src', 'index.html');
+      
+      if (fs.existsSync(srcfolder)) {
+        console.log(`files exist ${srcfolder}`);
+      } else {
+        console.log(`files not exist ${srcfolder}`);
+      }
+    } catch(err) {
+      console.error(err)
+    }
+
+
+
+
     bs_local = new browserstack.Local();
     bs_local.start({ key: accessKey, folder: folder, localIdentifier: localIdentifier, force : true }, function (error) {
       if (error) {
