@@ -1,6 +1,10 @@
-var gulp = require('gulp');
-var inlinesource = require('gulp-inline-source');
-var injectVersion = require('gulp-inject-version');
+const { version } = require('./package.json');
+const gulp = require('gulp');
+const zip = require('gulp-zip');
+const inlinesource = require('gulp-inline-source');
+const injectVersion = require('gulp-inject-version');
+const rename = require("gulp-rename");
+
 
 gulp.task('inlinesource', function () {
     var options = {
@@ -14,5 +18,10 @@ gulp.task('inlinesource', function () {
             prepend : 'v'
         }))
         .pipe(inlinesource(options))
+        .pipe(gulp.dest('./'))
+        .pipe(rename(function (path) {
+            path.basename = `bip39split-${version}`;
+          }))
+        .pipe(zip(`bip39split-${version}.zip`))
         .pipe(gulp.dest('./'));
 });
