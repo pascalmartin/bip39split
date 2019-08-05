@@ -1,14 +1,14 @@
 'use strict';
 var crypto = require('crypto');
 const path = require('path');
-const assert = require('assert');
 const webdriver = require('selenium-webdriver');
 const browserstack = require('browserstack-local');
-const { AfterAll, BeforeAll, Before, Given, When, Then, setDefaultTimeout } = require('cucumber');
+const { AfterAll, BeforeAll, Before, setDefaultTimeout } = require('cucumber');
 
 var username = process.env.BROWSERSTACK_USERNAME;
 var accessKey = process.env.BROWSERSTACK_ACCESS_KEY;
 var localIdentifier = process.env.BROWSERSTACK_LOCAL_IDENTIFIER;
+var sessionIdentifier = "travis";
 var onTravis = true;
 
 var randomValueHex = function(len) {
@@ -20,11 +20,24 @@ var randomValueHex = function(len) {
 
 if (!localIdentifier){
   onTravis = false;  
-  localIdentifier = "dev_" + randomValueHex(24);
+  localIdentifier = "dev-" + randomValueHex(24);
+  sessionIdentifier = "dev";
 }
 console.log(`browserstack onTravis: ${onTravis} localIdentifier: ${localIdentifier}`);
 
-//caps['browserstack.localIdentifier'] = ENV['BROWSERSTACK_LOCAL_IDENTIFIER']
+if (onTravis)
+{
+  console.log(`TRAVIS_BUILD_WEB_URL=${TRAVIS_BUILD_WEB_URL}`);
+  console.log(`TRAVIS_BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}`);
+  console.log(`TRAVIS_JOB_NUMBER=${TRAVIS_JOB_NUMBER}`);
+  console.log(`TRAVIS_BRANCH=${TRAVIS_BRANCH}`);
+  console.log(`TRAVIS_COMMIT=${TRAVIS_COMMIT}`);
+  console.log(`TRAVIS_COMMIT_MESSAGE=${TRAVIS_COMMIT_MESSAGE}`);
+  console.log(`TRAVIS_PULL_REQUEST=${TRAVIS_PULL_REQUEST}`);
+  console.log(`TRAVIS_PULL_REQUEST_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH}`);
+  console.log(`TRAVIS_PULL_REQUEST_SHA=${TRAVIS_PULL_REQUEST_SHA}`);
+  console.log(`TRAVIS_PULL_REQUEST_SLUG=${TRAVIS_PULL_REQUEST_SLUG}`);
+}
 
 var caps = {
     'browserName': 'Chrome',                
@@ -33,7 +46,7 @@ var caps = {
     'bstack:options': {
         'os': 'Windows',
         'osVersion': '7',
-        'sessionName': 'local_test',
+        'sessionName': `bip39split-${sessionIdentifier}`,
         'buildName': 'cucumber-js-browserstack',
         'projectName': 'bip39split',
         'debug': true,
@@ -63,7 +76,7 @@ BeforeAll({ timeout: 120 * 1000 }, function (callback) {
     // Code to start browserstack local before start of test and stop browserstack local after end of test
     console.log(`browserstack local folder: ${folder}`);
     bs_local = new browserstack.Local();
-    bs_local.start({ key: accessKey, folder: folder, localIdentifier: localIdentifier }, function (error) {
+    bs_local.start({ key: accessKey, folder: folder, localIdentifier: localIdentifier, force : true }, function (error) {
       if (error) {
         console.log(error);
         callback(error);
@@ -91,32 +104,9 @@ AfterAll(function (callback) {
     }
   }).catch(function (error) {
     next(error);
-  });;
+  });
 });
 
 Before(function () {
   this.driver = driver;
-});
-
-
-When('I open health check', function (next) {
-  this.driver.get('http://bs-local.com:45691/check').then(function () {
-    next();
-  }).catch(function (error) {
-    next(error);
-  });
-});
-
-Then('I should see {string}', { timeout: 120 * 1000 }, function (sourceMatch, next) {
-  this.driver.getPageSource()
-    .then(function (source) {
-      try {
-        assert.strictEqual(source.indexOf(sourceMatch) > -1, true, 'Expected source to contain ' + sourceMatch);
-        next();
-      } catch (err) {
-        next(' >> ' + err);
-      }
-    }).catch(function (error) {
-      next(error);
-    });
 });
