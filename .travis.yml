@@ -2,9 +2,9 @@ language: node_js
 node_js:
   - "lts/*"
 
-jobs:
-    script: npm run dist
-    script: npm test
+script: 
+  - npm run dist
+  - npm test
     
 #addons:
 #  browserstack:
