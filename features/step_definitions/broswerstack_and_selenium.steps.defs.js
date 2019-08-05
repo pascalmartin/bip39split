@@ -24,20 +24,17 @@ if (!localIdentifier){
   sessionIdentifier = "dev";
 }
 console.log(`browserstack onTravis: ${onTravis} localIdentifier: ${localIdentifier}`);
+console.log(`TRAVIS_BUILD_WEB_URL=${process.env.TRAVIS_BUILD_WEB_URL}`);
+console.log(`TRAVIS_BUILD_NUMBER=${process.env.TRAVIS_BUILD_NUMBER}`);
+console.log(`TRAVIS_JOB_NUMBER=${process.env.TRAVIS_JOB_NUMBER}`);
+console.log(`TRAVIS_BRANCH=${process.env.TRAVIS_BRANCH}`);
+console.log(`TRAVIS_COMMIT=${process.env.TRAVIS_COMMIT}`);
+console.log(`TRAVIS_COMMIT_MESSAGE=${process.env.TRAVIS_COMMIT_MESSAGE}`);
+console.log(`TRAVIS_PULL_REQUEST=${process.env.TRAVIS_PULL_REQUEST}`);
+console.log(`TRAVIS_PULL_REQUEST_BRANCH=${process.env.TRAVIS_PULL_REQUEST_BRANCH}`);
+console.log(`TRAVIS_PULL_REQUEST_SHA=${process.env.TRAVIS_PULL_REQUEST_SHA}`);
+console.log(`TRAVIS_PULL_REQUEST_SLUG=${process.env.TRAVIS_PULL_REQUEST_SLUG}`);
 
-if (onTravis)
-{
-  console.log(`TRAVIS_BUILD_WEB_URL=${TRAVIS_BUILD_WEB_URL}`);
-  console.log(`TRAVIS_BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}`);
-  console.log(`TRAVIS_JOB_NUMBER=${TRAVIS_JOB_NUMBER}`);
-  console.log(`TRAVIS_BRANCH=${TRAVIS_BRANCH}`);
-  console.log(`TRAVIS_COMMIT=${TRAVIS_COMMIT}`);
-  console.log(`TRAVIS_COMMIT_MESSAGE=${TRAVIS_COMMIT_MESSAGE}`);
-  console.log(`TRAVIS_PULL_REQUEST=${TRAVIS_PULL_REQUEST}`);
-  console.log(`TRAVIS_PULL_REQUEST_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH}`);
-  console.log(`TRAVIS_PULL_REQUEST_SHA=${TRAVIS_PULL_REQUEST_SHA}`);
-  console.log(`TRAVIS_PULL_REQUEST_SLUG=${TRAVIS_PULL_REQUEST_SLUG}`);
-}
 
 var caps = {
     'browserName': 'Chrome',                
