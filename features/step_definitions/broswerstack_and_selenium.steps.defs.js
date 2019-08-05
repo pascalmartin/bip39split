@@ -69,7 +69,7 @@ setDefaultTimeout(60 * 1000);
 BeforeAll({ timeout: 120 * 1000 }, function (callback) {
   var folder = path.resolve(__dirname, '..', '..');
   
-  if (!onTravis) {
+  if (!process.env.BROWSERSTACK_LOCAL_IDENTIFIER) {
     // Code to start browserstack local before start of test and stop browserstack local after end of test
     console.log(`browserstack local folder: ${folder}`);
     bs_local = new browserstack.Local();
