@@ -8,9 +8,9 @@ const { AfterAll, BeforeAll, Before, setDefaultTimeout } = require('cucumber');
 
 var username = process.env.BROWSERSTACK_USERNAME;
 var accessKey = process.env.BROWSERSTACK_ACCESS_KEY;
-var localIdentifier = process.env.BROWSERSTACK_LOCAL_IDENTIFIER;
-var sessionIdentifier = "travis";
-var onTravis = true;
+var localIdentifier = "";
+var sessionIdentifier = "";
+var onTravis = false;
 
 var randomValueHex = function(len) {
   return crypto
@@ -19,11 +19,15 @@ var randomValueHex = function(len) {
     .slice(0, len) // return required number of characters
 };
 
-if (!localIdentifier){
-  onTravis = false;  
+if (process.env.TRAVIS_BUILD_NUMBER){
+  onTravis = true;  
+  localIdentifier = process.env.BROWSERSTACK_LOCAL_IDENTIFIER || `travis-${process.env.TRAVIS_BUILD_NUMBER}-${process.env.TRAVIS_JOB_NUMBER}`;
+  sessionIdentifier = "travis";
+} else {
   localIdentifier = "dev-" + randomValueHex(24);
   sessionIdentifier = "dev";
 }
+
 console.log(`browserstack onTravis: ${onTravis} localIdentifier: ${localIdentifier}`);
 console.log(`TRAVIS_BUILD_WEB_URL=${process.env.TRAVIS_BUILD_WEB_URL}`);
 console.log(`TRAVIS_BUILD_NUMBER=${process.env.TRAVIS_BUILD_NUMBER}`);
@@ -73,21 +77,6 @@ BeforeAll({ timeout: 120 * 1000 }, function (callback) {
   if (!process.env.BROWSERSTACK_LOCAL_IDENTIFIER) {
     // Code to start browserstack local before start of test and stop browserstack local after end of test
     console.log(`browserstack local folder: ${folder}`);
-
-    try {
-      var srcfolder = path.resolve(__dirname, '..', '..','src', 'index.html');
-      
-      if (fs.existsSync(srcfolder)) {
-        console.log(`files exist ${srcfolder}`);
-      } else {
-        console.log(`files not exist ${srcfolder}`);
-      }
-    } catch(err) {
-      console.error(err)
-    }
-
-
-
 
     bs_local = new browserstack.Local();
     bs_local.start({ key: accessKey, folder: folder, localIdentifier: localIdentifier, force : true }, function (error) {
