@@ -45,6 +45,7 @@ var caps = {
     'browserName': 'Chrome',                
     'browserstack.use_w3c': true,
     'browserstack.localIdentifier': localIdentifier,
+    'browserstack.console' : 'verbose',
     'bstack:options': {
         'os': 'Windows',
         'osVersion': '7',
