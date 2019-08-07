@@ -249,19 +249,17 @@ function Split() {
 		splitResult = Bip39split.split(languageElement.value, mnemonic, nbShares, threshold);
 	}
 	catch (err) {
-		if (err.name == Bip39split.SPLIT_ERROR_NAME) {
-			if (!err.isValidThreshold) {
-				ShowThresholdError();
-			} else {
-				ShowThresholdSuccess();
-			}
-
-			if (!err.isValidMnemonic) {
-				ShowMnemonicError();
-			} else {
-				ShowMnemonicSuccess();
-			}
+		if (!err.isValidThreshold) {
+			ShowThresholdError();
+		} else {
+			ShowThresholdSuccess();
 		}
+
+		if (!err.isValidMnemonic) {
+			ShowMnemonicError();
+		} else {
+			ShowMnemonicSuccess();
+		}		
 
 		printBtnElement.style.display = "none";
 		return;

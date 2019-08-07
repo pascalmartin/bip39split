@@ -1,16 +1,10 @@
 
 class Bip39split {
 
-    static SPLIT_ERROR_NAME = "Bip39split split Error";
-    static SPLIT_ERROR_MESSAGE = "Split error detected";
-
-    static MERGE_ERROR_NAME = "Bip39split merge Error";
-    static MERGE_ERROR_MESSAGE = "Merge error detected";
-
     static split(mnemonicLanguage, mnemonic, nbShares, threshold) {
         var validationError = {
-            name: this.SPLIT_ERROR_NAME,
-            message: this.SPLIT_ERROR_MESSAGE,
+            name: "Bip39split split Error",
+            message: "Split error detected",
             isValidThreshold: true,
             isValidMnemonic: true
         };
@@ -52,8 +46,8 @@ class Bip39split {
 
         if (!isValidMnemonic) {
             throw {
-                name: this.MERGE_ERROR_NAME,
-                message: this.MERGE_ERROR_MESSAGE,
+                name: "Bip39split merge Error",
+                message: "Merge error detected",
                 isValidShares: false,
             };
         }
