@@ -232,8 +232,17 @@ svg.pie * {
   border-style: solid;
   border-width: 1px;
   background: #f9fdfa;
-  border-color: #32b643;
-  
+  border-color: #32b643;  
+}
+
+#merge-result-hash{
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+  margin: 20px;
+  border-style: solid;
+  border-width: 1px;
+  word-wrap: break-word;
 }
 
 #preview {

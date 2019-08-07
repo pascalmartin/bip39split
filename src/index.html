@@ -91,7 +91,7 @@
 
           <!-- form structure -->
           <div class="form-group">
-              <button class="btn btn-primary" type="button" onclick="split()">Split</button>
+              <button class="btn btn-primary" type="button" onclick="Split()">Split</button>
               <button id="print-btn" class="btn btn-success" type="button" onclick="window.print()">Print</button>
           </div>
         </form>
@@ -173,6 +173,8 @@
           <div id="merge-result" style="display: none">
               <h3>Reconstructed Bip39 Mnemonic</h3>
               <div id="merge-result-mnemonic"></div>
+              <h3>Reconstructed Bip39 Mnemonic Hash</h3>
+              <div id="merge-result-hash"></div>
           </div>
       </div>
 
@@ -272,6 +274,7 @@
   <script inline src="../lib/qrcodegen.js"></script>
   <script inline src="../node_modules/webrtc-adapter/out/adapter.js"></script>
   <script inline src="../lib/instascan.min.js"></script>
+  <script inline src="./js/bip39split.js"></script>
   <script inline src="./js/app.js"></script>
   
   <script id="reconstruct_share_template" type="x-tmpl-mustache">
