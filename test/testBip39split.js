@@ -357,6 +357,7 @@ describe('Test Bip39split class', function () {
             describe('Test file: ' + testFile, function () {
 
                 before("Load Test data", function (done) {
+                    this.timeout(30 * SECONDE);
                     loadJSON(testFile, function (err, data) {
                         if (err) {
                             done(err)
