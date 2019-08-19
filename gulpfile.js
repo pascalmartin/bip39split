@@ -14,14 +14,14 @@ gulp.task('inlinesource', function () {
 
     return gulp.src('./src/index.html')
         .pipe(injectVersion({
-            replace : /%%GULP_INJECT_VERSION%%/g,
-            prepend : 'v'
+            replace: /%%GULP_INJECT_VERSION%%/g,
+            prepend: 'v'
         }))
         .pipe(inlinesource(options))
         .pipe(gulp.dest('./'))
         .pipe(rename(function (path) {
             path.basename = `bip39split-${version}`;
-          }))
+        }))
         .pipe(zip(`bip39split-${version}.zip`))
         .pipe(gulp.dest('./'));
 });

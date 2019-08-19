@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Mocha Tests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/mocha@6.2.0/mocha.css" />
+</head>
+
+<body>
+    <div id="mocha"></div>
+    <script src="../node_modules/sjcl/sjcl.js"></script>
+    <script src="../node_modules/secrets.js-grempe/secrets.min.js"></script>
+    <script src="../node_modules/crypto-js/crypto-js.js"></script>
+    <script src="../lib/bip39.min.js"></script>
+    <script src="../src/js/bip39split.js"></script>
+
+    <script src="../node_modules/should/should.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+
+    <script class="mocha-init">
+        mocha.setup('bdd');
+        mocha.checkLeaks();
+    </script>
+    <script src="testBip39split.js"></script>
+    <script class="mocha-exec">
+        mocha.run(function (failures) {
+
+            var failuresDiv = document.createElement('div');
+            failuresDiv.id = 'test-failures'
+            failuresDiv.innerHTML = failures;
+
+            var successDiv = document.createElement('div');
+            successDiv.id = 'test-success'
+            successDiv.innerHTML = document.querySelector("#mocha-stats > li.passes > em").innerHTML;
+
+            var generatedSeed = [];
+            // Generate test data on multiple os browser and device
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+            /*
+            // 12, 15, 18, 21, 24 words
+            [128, 160, 192, 224, 256].forEach(function (entropyBits) {
+                Object.keys(bip39.wordlists).forEach(function (mnemonicLanguage) {
+                    // Skip alias EN JA
+                    if (mnemonicLanguage.length <= 2) {
+                        return;
+                    }
+
+                    for (let i = 0; i < 10; i++) {
+                        const nbShares = i == 0 ? 4 : getRndInteger(2, 10);
+                        const threshold = i == 0 ? 3 : getRndInteger(2, nbShares);
+                        const mnemonic = bip39.generateMnemonic(entropyBits, null, bip39.wordlists[mnemonicLanguage]);
+                        const split = Bip39split.split(mnemonicLanguage, mnemonic, nbShares, threshold, bip39, CryptoJS, secrets);
+                        generatedSeed.push({
+                            entropyBits: entropyBits,
+                            mnemonicLanguage: mnemonicLanguage,
+                            mnemonic: mnemonic,
+                            nbShares: nbShares,
+                            threshold: threshold,
+                            split: split
+                        });
+                    }
+                });
+            });*/
+
+            var generatedTestDataDiv = document.createElement('div');
+            generatedTestDataDiv.id = 'generated-test-data'
+            generatedTestDataDiv.innerHTML = JSON.stringify(generatedSeed);
+            console.log(JSON.stringify(generatedSeed));
+
+            var docFrag = document.createDocumentFragment();
+            docFrag.appendChild(failuresDiv);
+            docFrag.appendChild(successDiv);
+            docFrag.appendChild(generatedTestDataDiv);
+            document.body.appendChild(docFrag);
+        });
+    </script>
+</body>
+
+</html>

@@ -54,7 +54,7 @@ var envs = [{
 }, {
     'os': 'OS X',
     'osVersion': 'Mojave',
-    'browsers': ['Chrome', 'Firefox', 'Safari', 'Opera']
+    'browsers': ['Chrome', 'Firefox', 'Safari']
 }, {
     'deviceName': 'iPad Pro 12.9 2018',
     'osVersion': '12',
@@ -66,11 +66,6 @@ var envs = [{
     'realMobile': 'true',
     'browserName': 'Safari'
 }, {
-    'deviceName': 'Google Nexus 9',
-    'osVersion': '5.1',
-    'realMobile': 'true',
-    'browserName': 'Chrome'
-}, {
     'deviceName': 'Samsung Galaxy S9 Plus',
     'osVersion': '9.0',
     'realMobile': 'true',
@@ -81,6 +76,13 @@ var envs = [{
     'realMobile': 'true',
     'browserName': 'Chrome'
 }];
+/*
+envs = [{
+    'os': 'Windows',
+    'osVersion': '10',
+    'browsers': ['Chrome']
+}];*/
+//envs = [];
 
 var caps = [];
 envs.forEach(function (env) {

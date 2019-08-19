@@ -122,7 +122,7 @@ function Reconstruct() {
 	HideHashErrorOrSuccess();
 
 	try {
-		var result = Bip39split.merge(languageElement.value, restShares, validationHash);
+		var result = Bip39split.merge(languageElement.value, restShares, validationHash, bip39, CryptoJS, secrets);
 		ShowSharesSuccess();
 		ShowReconstructResult(result);
 
@@ -246,7 +246,7 @@ function Split() {
 	piecesElement.innerHTML = "";
 
 	try {
-		splitResult = Bip39split.split(languageElement.value, mnemonic, nbShares, threshold);
+		splitResult = Bip39split.split(languageElement.value, mnemonic, nbShares, threshold, bip39, CryptoJS, secrets);
 	}
 	catch (err) {
 		if (!err.isValidThreshold) {
@@ -259,7 +259,7 @@ function Split() {
 			ShowMnemonicError();
 		} else {
 			ShowMnemonicSuccess();
-		}		
+		}
 
 		printBtnElement.style.display = "none";
 		return;

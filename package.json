@@ -20,10 +20,8 @@
         "webrtc-adapter": "3.3.3"
     },
     "devDependencies": {
-        "async": "3.1.0",
         "browserify": "16.3.0",
         "browserstack-local": "1.4.2",
-        "cucumber": "5.1.0",
         "gulp": "4.0.2",
         "gulp-inject-version": "1.0.1",
         "gulp-inline-source": "4.0.0",
@@ -37,6 +35,6 @@
     "scripts": {
         "compileBip39Lib": "browserify -s bip39 node_modules/bip39/index.js | uglifyjs > lib/bip39.min.js",
         "dist": "gulp inlinesource",
-        "test": "mocha"
+        "test": "mocha --require should"
     }
 }
