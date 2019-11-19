@@ -20,17 +20,17 @@
         "webrtc-adapter": "3.3.3"
     },
     "devDependencies": {
-        "browserify": "16.3.0",
+        "browserify": "16.5.0",
         "browserstack-local": "1.4.2",
         "gulp": "4.0.2",
         "gulp-inject-version": "1.0.1",
         "gulp-inline-source": "4.0.0",
         "gulp-rename": "1.4.0",
-        "gulp-zip": "5.0.0",
-        "mocha": "6.2.0",
-        "selenium-webdriver": "4.0.0-alpha.4",
+        "gulp-zip": "5.0.1",
+        "mocha": "6.2.2",
+        "selenium-webdriver": "4.0.0-alpha.5",
         "should": "13.2.3",
-        "uglify-js": "3.6.0"
+        "uglify-js": "3.6.9"
     },
     "scripts": {
         "compileBip39Lib": "browserify -s bip39 node_modules/bip39/index.js | uglifyjs > lib/bip39.min.js",

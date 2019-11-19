@@ -53,16 +53,16 @@ var envs = [{
     'browsers': ['Chrome', 'Firefox', 'Edge']
 }, {
     'os': 'OS X',
-    'osVersion': 'Mojave',
+    'osVersion': 'Catalina',
     'browsers': ['Chrome', 'Firefox', 'Safari']
 }, {
     'deviceName': 'iPad Pro 12.9 2018',
-    'osVersion': '12',
+    'osVersion': '13',
     'realMobile': 'true',
     'browserName': 'Safari'
 }, {
     'deviceName': 'iPhone XS',
-    'osVersion': '12',
+    'osVersion': '13',
     'realMobile': 'true',
     'browserName': 'Safari'
 }, {
@@ -81,7 +81,14 @@ envs = [{
     'os': 'Windows',
     'osVersion': '10',
     'browsers': ['Chrome']
-}];*/
+}];
+envs = [{
+    'deviceName': 'iPad Pro 12.9 2018',
+    'osVersion': '13',
+    'realMobile': 'true',
+    'browserName': 'Safari'
+}];
+*/
 //envs = [];
 
 var caps = [];

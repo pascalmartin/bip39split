@@ -20,6 +20,24 @@ describe('Test bip39split App in multiple browser', function () {
                 driver = new webdriver.Builder().usingServer(`https://${username}:${accessKey}@hub-cloud.browserstack.com/wd/hub`).withCapabilities(cap).build();
             });
 
+            it('Test get index.html', function () {
+                this.timeout(2 * MINUTE);
+                return driver.get(`http://${username}.browserstack.com/index.html`).then(function () {
+                    return driver.getPageSource().then(function (source) {
+                        source.should.containEql('Tool to create fragmented paper backup of your bip39 mnemonic phrase.');
+                    });
+                });
+            });
+
+            it('Test get src/index.html', function () {
+                this.timeout(2 * MINUTE);
+                return driver.get(`http://${username}.browserstack.com/src/index.html`).then(function () {
+                    return driver.getPageSource().then(function (source) {
+                        source.should.containEql('Tool to create fragmented paper backup of your bip39 mnemonic phrase.');
+                    });
+                });
+            });
+
             it('Test get test/index.html', function () {
                 const MAX_ALL_TEST_EXECUTION_TIME = 9 * MINUTE;
                 this.timeout(MAX_ALL_TEST_EXECUTION_TIME + (10 * SECONDE));
@@ -38,25 +56,6 @@ describe('Test bip39split App in multiple browser', function () {
                         testData.generateOn = cap.testName;
                     });
                     generatedTestDatas = generatedTestDatas.concat(generatedTestData);
-                });
-            });
-
-            it('Test get index.html', function () {
-                this.timeout(2 * MINUTE);
-                return driver.get(`http://${username}.browserstack.com/index.html`).then(function () {
-                    return driver.getPageSource().then(function (source) {
-                        source.should.containEql('Tool to create fragmented paper backup of your bip39 mnemonic phrase.');
-                    });
-                });
-            });
-
-
-            it('Test get src/index.html', function () {
-                this.timeout(2 * MINUTE);
-                return driver.get(`http://${username}.browserstack.com/src/index.html`).then(function () {
-                    return driver.getPageSource().then(function (source) {
-                        source.should.containEql('Tool to create fragmented paper backup of your bip39 mnemonic phrase.');
-                    });
                 });
             });
 
